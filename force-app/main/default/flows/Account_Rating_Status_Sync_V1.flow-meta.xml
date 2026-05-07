@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Cold_Or_No_Rating_Description</name>
+        <label>Assign Cold Or No Rating Description</label>
+        <locationX>704</locationX>
+        <locationY>288</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>❄️ INACTIVE: Account is Cold or unrated — deprioritize and revisit during next planning cycle.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Hot_Description</name>
+        <label>Assign Hot Description</label>
+        <locationX>176</locationX>
+        <locationY>288</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>🔥 URGENT: Account is HOT — assign to senior rep and initiate outreach today.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Warm_Description</name>
+        <label>Assign Warm Description</label>
+        <locationX>440</locationX>
+        <locationY>288</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>⚠️ WATCH LIST: Account is Warm — nurture with monthly touchpoints and monitor engagement.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Check_Rating_Value</name>
+        <label>Check Rating Value</label>
+        <locationX>440</locationX>
+        <locationY>168</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Cold_Or_No_Rating_Description</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Cold / No Rating</defaultConnectorLabel>
+        <rules>
+            <name>Is_Hot</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Rating</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Hot</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Hot_Description</targetReference>
+            </connector>
+            <label>Is Hot</label>
+        </rules>
+        <rules>
+            <name>Is_Warm</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Rating</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Warm</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Warm_Description</targetReference>
+            </connector>
+            <label>Is Warm</label>
+        </rules>
+    </decisions>
+    <description>V2 - Syncs Account Description based on Rating changes. Before Save version with simplified branching. Used for demo conflict resolution.</description>
+    <label>Account Rating Status Sync V1</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>440</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Check_Rating_Value</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Rating</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>
