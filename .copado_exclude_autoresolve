@@ -19,6 +19,6 @@
 # Exclude all Layouts
 # **/layouts/*.layout-meta.xml
 # Exclude all Custom Object files from auto-resolve
-**/objects/**/*.object-meta.xml
+# **/objects/**/*.object-meta.xml
 # Exclude all Flow files from auto-resolve
-**/flows/*.flow-meta.xml
+# **/flows/*.flow-meta.xml
