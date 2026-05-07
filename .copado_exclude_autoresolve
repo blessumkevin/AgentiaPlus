@@ -18,3 +18,5 @@
 **/lwc/**
 # Exclude all Layouts
 # **/layouts/*.layout-meta.xml
+# Exclude all Flow files from auto-resolve
+**/flows/*.flow-meta.xml
