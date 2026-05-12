@@ -155,9 +155,8 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Prize</label>
     <nameField>
-        <displayFormat>PRIZE-{0000}</displayFormat>
         <label>Prize Name</label>
-        <type>AutoNumber</type>
+        <type>Text</type>
     </nameField>
     <pluralLabel>Prizes</pluralLabel>
     <searchLayouts />
