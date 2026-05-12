@@ -3,6 +3,5 @@
     <fullName>Value_Not_Zero</fullName>
     <active>true</active>
     <errorConditionFormula>Value__c = 0</errorConditionFormula>
-    <errorDisplayField>Value__c</errorDisplayField>
     <errorMessage>Value cannot be $0.</errorMessage>
 </ValidationRule>
