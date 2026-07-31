@@ -24,6 +24,16 @@
                 <default>false</default>
                 <label>Hybrid</label>
             </value>
+            <value>
+                <fullName>BMX</fullName>
+                <default>false</default>
+                <label>BMX</label>
+            </value>
+            <value>
+                <fullName>Electric</fullName>
+                <default>false</default>
+                <label>Electric</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
