@@ -6,6 +6,7 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
+        <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
@@ -22,6 +23,16 @@
                 <fullName>Hybrid</fullName>
                 <default>false</default>
                 <label>Hybrid</label>
+            </value>
+            <value>
+                <fullName>BMX</fullName>
+                <default>false</default>
+                <label>BMX</label>
+            </value>
+            <value>
+                <fullName>Electric</fullName>
+                <default>false</default>
+                <label>Electric</label>
             </value>
         </valueSetDefinition>
     </valueSet>

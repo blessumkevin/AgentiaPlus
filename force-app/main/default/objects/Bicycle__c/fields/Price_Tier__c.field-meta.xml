@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Price_Tier__c</fullName>
+    <description>Automatically calculated by the Bicycle Price Tier Flow based on the Price field. Values follow the Tier 3 (under $500), Tier 2 ($500-$999), Tier 1 ($1,000 or more) ranges.</description>
     <label>Price Tier</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
+        <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
