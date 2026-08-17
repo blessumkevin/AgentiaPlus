@@ -19,7 +19,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Tier_1</targetReference>
+                <targetReference>Set_Tier_1</targetReference>
             </connector>
             <label>Tier 1</label>
         </rules>
@@ -41,7 +41,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Tier_2</targetReference>
+                <targetReference>Set_Tier_2</targetReference>
             </connector>
             <label>Tier 2</label>
         </rules>
@@ -56,7 +56,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Tier_3</targetReference>
+                <targetReference>Set_Tier_3</targetReference>
             </connector>
             <label>Tier 3</label>
         </rules>
@@ -65,8 +65,8 @@
     <label>Bicycle Price Tier Flow</label>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
-        <name>Update_Tier_1</name>
-        <label>Update Tier 1</label>
+        <name>Set_Tier_1</name>
+        <label>Set Tier 1</label>
         <locationX>0</locationX>
         <locationY>372</locationY>
         <inputAssignments>
@@ -78,8 +78,8 @@
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <recordUpdates>
-        <name>Update_Tier_2</name>
-        <label>Update Tier 2</label>
+        <name>Set_Tier_2</name>
+        <label>Set Tier 2</label>
         <locationX>176</locationX>
         <locationY>372</locationY>
         <inputAssignments>
@@ -91,8 +91,8 @@
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <recordUpdates>
-        <name>Update_Tier_3</name>
-        <label>Update Tier 3</label>
+        <name>Set_Tier_3</name>
+        <label>Set Tier 3</label>
         <locationX>352</locationX>
         <locationY>372</locationY>
         <inputAssignments>
