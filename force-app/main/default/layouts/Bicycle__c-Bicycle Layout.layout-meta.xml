@@ -14,8 +14,6 @@
                 <behavior>Required</behavior>
                 <field>Type__c</field>
             </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Price__c</field>
@@ -25,7 +23,7 @@
                 <field>Price_Tier__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsTopToBottom</style>
+        <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>
