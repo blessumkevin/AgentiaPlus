@@ -21,7 +21,7 @@
             <connector>
                 <targetReference>Set_Tier_1</targetReference>
             </connector>
-            <label>Tier 1</label>
+            <label>Tier 1 - Price &gt;= 1000</label>
         </rules>
         <rules>
             <name>Tier_2</name>
@@ -43,7 +43,7 @@
             <connector>
                 <targetReference>Set_Tier_2</targetReference>
             </connector>
-            <label>Tier 2</label>
+            <label>Tier 2 - Price between 500 and 999.99</label>
         </rules>
         <rules>
             <name>Tier_3</name>
@@ -58,17 +58,16 @@
             <connector>
                 <targetReference>Set_Tier_3</targetReference>
             </connector>
-            <label>Tier 3</label>
+            <label>Tier 3 - Price less than 500</label>
         </rules>
     </decisions>
-    <interviewLabel>Bicycle Price Tier Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Bicycle Price Tier Flow</label>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
         <name>Set_Tier_1</name>
         <label>Set Tier 1</label>
         <locationX>0</locationX>
-        <locationY>372</locationY>
+        <locationY>396</locationY>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
@@ -81,7 +80,7 @@
         <name>Set_Tier_2</name>
         <label>Set Tier 2</label>
         <locationX>176</locationX>
-        <locationY>372</locationY>
+        <locationY>396</locationY>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
@@ -94,7 +93,7 @@
         <name>Set_Tier_3</name>
         <label>Set Tier 3</label>
         <locationX>352</locationX>
-        <locationY>372</locationY>
+        <locationY>396</locationY>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
