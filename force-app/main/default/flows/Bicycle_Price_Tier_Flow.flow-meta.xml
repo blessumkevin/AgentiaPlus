@@ -3,13 +3,16 @@
     <apiVersion>62.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
-        <name>Check_Price_Tier</name>
-        <label>Check Price Tier</label>
+        <name>Determine_Price_Tier</name>
+        <label>Determine Price Tier</label>
         <locationX>176</locationX>
-        <locationY>252</locationY>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <locationY>242</locationY>
+        <defaultConnector>
+            <targetReference>Update_Tier_3</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Below $500 - Tier 3</defaultConnectorLabel>
         <rules>
-            <name>Tier_1</name>
+            <name>Is_Tier_1</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Price__c</leftValueReference>
@@ -19,12 +22,12 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Set_Tier_1</targetReference>
+                <targetReference>Update_Tier_1</targetReference>
             </connector>
-            <label>Tier 1 - Price &gt;= 1000</label>
+            <label>Price &gt;= $1,000 (Tier 1)</label>
         </rules>
         <rules>
-            <name>Tier_2</name>
+            <name>Is_Tier_2</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Price__c</leftValueReference>
@@ -33,80 +36,84 @@
                     <numberValue>500.0</numberValue>
                 </rightValue>
             </conditions>
-            <conditions>
-                <leftValueReference>$Record.Price__c</leftValueReference>
-                <operator>LessThan</operator>
-                <rightValue>
-                    <numberValue>1000.0</numberValue>
-                </rightValue>
-            </conditions>
             <connector>
-                <targetReference>Set_Tier_2</targetReference>
+                <targetReference>Update_Tier_2</targetReference>
             </connector>
-            <label>Tier 2 - Price between 500 and 999.99</label>
-        </rules>
-        <rules>
-            <name>Tier_3</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Price__c</leftValueReference>
-                <operator>LessThan</operator>
-                <rightValue>
-                    <numberValue>500.0</numberValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Tier_3</targetReference>
-            </connector>
-            <label>Tier 3 - Price less than 500</label>
+            <label>Price $500-$999 (Tier 2)</label>
         </rules>
     </decisions>
+    <description>Sets the Price Tier field on a Bicycle record based on the Price value when a record is created or updated.</description>
+    <interviewLabel>Bicycle Price Tier Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Bicycle Price Tier Flow</label>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
-        <name>Set_Tier_1</name>
-        <label>Set Tier 1</label>
+        <name>Update_Tier_1</name>
+        <label>Set Price Tier to Tier 1</label>
         <locationX>0</locationX>
-        <locationY>396</locationY>
+        <locationY>458</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
                 <stringValue>Tier 1</stringValue>
             </value>
         </inputAssignments>
-        <inputReference>$Record</inputReference>
+        <object>Bicycle__c</object>
     </recordUpdates>
     <recordUpdates>
-        <name>Set_Tier_2</name>
-        <label>Set Tier 2</label>
+        <name>Update_Tier_2</name>
+        <label>Set Price Tier to Tier 2</label>
         <locationX>176</locationX>
-        <locationY>396</locationY>
+        <locationY>458</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
                 <stringValue>Tier 2</stringValue>
             </value>
         </inputAssignments>
-        <inputReference>$Record</inputReference>
+        <object>Bicycle__c</object>
     </recordUpdates>
     <recordUpdates>
-        <name>Set_Tier_3</name>
-        <label>Set Tier 3</label>
-        <locationX>352</locationX>
-        <locationY>396</locationY>
+        <name>Update_Tier_3</name>
+        <label>Set Price Tier to Tier 3</label>
+        <locationX>412</locationX>
+        <locationY>458</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
                 <stringValue>Tier 3</stringValue>
             </value>
         </inputAssignments>
-        <inputReference>$Record</inputReference>
+        <object>Bicycle__c</object>
     </recordUpdates>
     <start>
         <locationX>50</locationX>
-        <locationY>0</locationY>
+        <locationY>50</locationY>
         <connector>
-            <targetReference>Check_Price_Tier</targetReference>
+            <targetReference>Determine_Price_Tier</targetReference>
         </connector>
         <object>Bicycle__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
