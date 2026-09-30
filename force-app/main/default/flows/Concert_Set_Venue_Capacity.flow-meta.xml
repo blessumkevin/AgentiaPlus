@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Set_New_Orleans_Capacity</name>
+        <label>Set New Orleans Capacity</label>
+        <locationX>314</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Capacity__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>1200.0</numberValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_New_York_Capacity</name>
+        <label>Set New York Capacity</label>
+        <locationX>578</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Capacity__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>3500.0</numberValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_San_Francisco_Capacity</name>
+        <label>Set San Francisco Capacity</label>
+        <locationX>50</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Capacity__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>2000.0</numberValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Determine_Venue_Capacity</name>
+        <label>Determine Venue Capacity</label>
+        <locationX>314</locationX>
+        <locationY>287</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>San_Francisco</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>San Francisco</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_San_Francisco_Capacity</targetReference>
+            </connector>
+            <label>San Francisco</label>
+        </rules>
+        <rules>
+            <name>New_Orleans</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New Orleans</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_New_Orleans_Capacity</targetReference>
+            </connector>
+            <label>New Orleans</label>
+        </rules>
+        <rules>
+            <name>New_York</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New York</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_New_York_Capacity</targetReference>
+            </connector>
+            <label>New York</label>
+        </rules>
+    </decisions>
+    <description>Sets Concert Capacity based on City: San Francisco 2000, New Orleans 1200, New York 3500</description>
+    <interviewLabel>Concert Set Venue Capacity {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Concert Set Venue Capacity</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Determine_Venue_Capacity</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>City__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Concert__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
