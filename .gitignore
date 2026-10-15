@@ -78,3 +78,6 @@ $RECYCLE.BIN/
 #**/dashboards/**
 #**/reports/**
 .agentia/
+.agents/
+.cursor/
+AGENTS.md
