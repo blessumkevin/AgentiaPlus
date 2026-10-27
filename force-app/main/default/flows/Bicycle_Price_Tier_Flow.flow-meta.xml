@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>62.0</apiVersion>
+    <apiVersion>61.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
-        <name>Check_Price_Tier</name>
-        <label>Check Price Tier</label>
-        <locationX>176</locationX>
-        <locationY>252</locationY>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <name>Determine_Price_Tier</name>
+        <label>Determine Price Tier</label>
+        <locationX>314</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>No Change Needed</defaultConnectorLabel>
         <rules>
-            <name>Tier_1</name>
+            <name>Tier_1_Price</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Price__c</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
                     <numberValue>1000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Price_Tier__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Tier 1</stringValue>
                 </rightValue>
             </conditions>
             <connector>
                 <targetReference>Set_Tier_1</targetReference>
             </connector>
-            <label>Tier 1 - Price &gt;= 1000</label>
+            <label>Tier 1 Price</label>
         </rules>
         <rules>
-            <name>Tier_2</name>
+            <name>Tier_2_Price</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Price__c</leftValueReference>
@@ -40,13 +47,20 @@
                     <numberValue>1000.0</numberValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Price_Tier__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Tier 2</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Set_Tier_2</targetReference>
             </connector>
-            <label>Tier 2 - Price between 500 and 999.99</label>
+            <label>Tier 2 Price</label>
         </rules>
         <rules>
-            <name>Tier_3</name>
+            <name>Tier_3_Price</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Price__c</leftValueReference>
@@ -55,10 +69,17 @@
                     <numberValue>500.0</numberValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Price_Tier__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Tier 3</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Set_Tier_3</targetReference>
             </connector>
-            <label>Tier 3 - Price less than 500</label>
+            <label>Tier 3 Price</label>
         </rules>
     </decisions>
     <label>Bicycle Price Tier Flow</label>
@@ -66,8 +87,8 @@
     <recordUpdates>
         <name>Set_Tier_1</name>
         <label>Set Tier 1</label>
-        <locationX>0</locationX>
-        <locationY>396</locationY>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
@@ -79,8 +100,8 @@
     <recordUpdates>
         <name>Set_Tier_2</name>
         <label>Set Tier 2</label>
-        <locationX>176</locationX>
-        <locationY>396</locationY>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
@@ -92,8 +113,8 @@
     <recordUpdates>
         <name>Set_Tier_3</name>
         <label>Set Tier 3</label>
-        <locationX>352</locationX>
-        <locationY>396</locationY>
+        <locationX>578</locationX>
+        <locationY>431</locationY>
         <inputAssignments>
             <field>Price_Tier__c</field>
             <value>
@@ -103,11 +124,19 @@
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>188</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Check_Price_Tier</targetReference>
+            <targetReference>Determine_Price_Tier</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Price__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
         <object>Bicycle__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
