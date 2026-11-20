@@ -157,6 +157,7 @@
     <label>Bicycle</label>
     <nameField>
         <label>Bicycle Name</label>
+        <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
     <pluralLabel>Bicycles</pluralLabel>
