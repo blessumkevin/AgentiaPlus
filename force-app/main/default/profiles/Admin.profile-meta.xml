@@ -11275,17 +11275,17 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Concert__c.City__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Concert__c.Concert_Date__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Concert__c.Concert_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Concert__c.Venue_Capacity__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -31885,6 +31885,10 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>CreateSalesforcePages</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>CreateTopics</name>
     </userPermissions>
     <userPermissions>
@@ -31914,6 +31918,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>DeleteTopics</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>DeploySalesforcePages</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -32542,6 +32550,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewRoles</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewSalesforcePages</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
