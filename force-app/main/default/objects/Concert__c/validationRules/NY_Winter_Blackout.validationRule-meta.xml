@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NY_Winter_Blackout</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPICKVAL(City__c, &quot;New York&quot;), NOT(ISBLANK(Concert_Date__c)), OR(MONTH(Concert_Date__c) = 12, MONTH(Concert_Date__c) = 1, MONTH(Concert_Date__c) = 2))</errorConditionFormula>
+    <errorMessage>The New York venue is closed during December, January, and February. Please select a different date or city.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Set_NO</name>
+        <label>Set NO</label>
+        <locationX>200</locationX>
+        <locationY>300</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Venue_Capacity__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>1200.0</numberValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_NY</name>
+        <label>Set NY</label>
+        <locationX>400</locationX>
+        <locationY>300</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Venue_Capacity__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>3500.0</numberValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_SF</name>
+        <label>Set SF</label>
+        <locationX>0</locationX>
+        <locationY>300</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Venue_Capacity__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>2000.0</numberValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>City_Decision</name>
+        <label>City Decision</label>
+        <locationX>50</locationX>
+        <locationY>150</locationY>
+        <defaultConnectorLabel>Other</defaultConnectorLabel>
+        <rules>
+            <name>Is_San_Francisco</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>San Francisco</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_SF</targetReference>
+            </connector>
+            <label>San Francisco</label>
+        </rules>
+        <rules>
+            <name>Is_New_Orleans</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New Orleans</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_NO</targetReference>
+            </connector>
+            <label>New Orleans</label>
+        </rules>
+        <rules>
+            <name>Is_New_York</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New York</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_NY</targetReference>
+            </connector>
+            <label>New York</label>
+        </rules>
+    </decisions>
+    <label>Concert Capacity Auto Population</label>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>City_Decision</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>City__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Concert__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
